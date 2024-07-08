@@ -1,0 +1,45 @@
+#!/bin/bash
+
+#setup
+if ! (type "recpt1" > /dev/null 2>&1); then
+	apt-get update
+	apt-get install -y --no-install-recommends git autoconf automake cmake libpcsclite1 libtool
+
+	cd /tmp
+	git clone --depth 1 https://github.com/tsunoda14/libyakisoba.git
+	cd libyakisoba; autoreconf -i; mkdir build; cd build
+	../configure
+	make
+	make install
+	ldconfig
+
+	cd /tmp
+	git clone --depth 1 https://github.com/tsunoda14/libsobacas.git
+	cd libsobacas; autoreconf -i; mkdir build; cd build
+	../configure
+	make
+	make install
+	ldconfig
+
+	cd /tmp
+	git clone --depth 1  https://github.com/tsukumijima/libaribb25.git
+	cd libaribb25
+	cmake . -B build -DWITH_PCSC_PACKAGE=NO -DWITH_PCSC_LIBRARY=sobacas
+	cd build
+	make
+	make install
+	ldconfig
+
+	cd /tmp
+	git clone https://github.com/stz2012/recpt1.git
+	cd recpt1/recpt1
+	./autogen.sh
+	./configure --enable-b25
+	make
+	make install
+
+	apt-get clean
+	rm -rf /var/lib/apt/lists/*
+fi
+
+recpt1 -v

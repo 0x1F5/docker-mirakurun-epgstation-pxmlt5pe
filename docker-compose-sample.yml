@@ -11,11 +11,17 @@ services:
         volumes:
             - ./mirakurun/conf:/app-config
             - ./mirakurun/data:/app-data
+            - ./mirakurun/opt/bin:/opt/bin
         environment:
             TZ: "Asia/Tokyo"
+            BCAS_KEYS_FILE: "/opt/bin/bcas_keys"
         devices:
             - /dev/bus:/dev/bus
-            - /dev/dvb:/dev/dvb
+            - /dev/pxmlt5video0:/dev/pxmlt5video0
+            - /dev/pxmlt5video1:/dev/pxmlt5video1
+            - /dev/pxmlt5video2:/dev/pxmlt5video2
+            - /dev/pxmlt5video3:/dev/pxmlt5video3
+            - /dev/pxmlt5video4:/dev/pxmlt5video4
         restart: always
         logging:
             driver: json-file
@@ -61,8 +67,12 @@ services:
             - "8888:8888"
             - "8889:8889"
 #         user: "1000:1000"
-#         devices:
-#             - /dev/dri:/dev/dri
+        devices:
+            - /dev/pxmlt5video0:/dev/pxmlt5video0
+            - /dev/pxmlt5video1:/dev/pxmlt5video1
+            - /dev/pxmlt5video2:/dev/pxmlt5video2
+            - /dev/pxmlt5video3:/dev/pxmlt5video3
+            - /dev/pxmlt5video4:/dev/pxmlt5video4
         restart: always
 
 volumes:
