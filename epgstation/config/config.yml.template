@@ -1,6 +1,11 @@
 port: 8888
 mirakurunPath: http://mirakurun:40772/
 
+# https:
+#     port: 8888
+#     key: /app/config/certs/yourtailscale.domain.ts.net.key
+#     cert: /app/config/certs/yourtailscale.domain.ts.net.crt
+
 # dbtype: sqlite
 # sqlite:
 #   extensions:
@@ -20,7 +25,7 @@ epgUpdateIntervalTime: 10
 conflictPriority: 1
 recPriority: 2
 
-recordedFormat: '%YEAR%年%MONTH%月%DAY%日%HOUR%時%MIN%分%SEC%秒-%TITLE%'
+recordedFormat: '%YEAR%-%MONTH%-%DAY%-%HOUR%-%MIN%-[%CHNAME%] %TITLE%'
 recordedFileExtension: .m2ts
 recorded:
     - name: recorded
@@ -36,6 +41,18 @@ ffprobe: /usr/local/bin/ffprobe
 encodeProcessNum: 4
 concurrentEncodeNum: 1
 encode:
+    - name: H265_qsvenc
+      cmd: '/bin/bash %ROOT%/config/qsvenc_h265.sh'
+      suffix: .mp4
+      rate: 4.0
+    - name: H264_qsvenc
+      cmd: '/bin/bash %ROOT%/config/qsvenc_h264.sh'
+      suffix: .mp4
+      rate: 4.0
+    - name: tsreplace
+      cmd: '/bin/bash %ROOT%/config/tsreplace.sh'
+      suffix: -tsreplace.m2ts
+      rate: 4.0
     - name: H.264
       cmd: '%NODE% %ROOT%/config/enc.js'
       suffix: .mp4

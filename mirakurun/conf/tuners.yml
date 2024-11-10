@@ -1,0 +1,40 @@
+- name: PX-MLT5PE_0
+  types:
+    - GR
+    - BS
+    - CS
+  command: recpt1 --device /dev/pxmlt5video0 <channel> - -
+  isDisabled: false
+  decoder: arib-b25-stream-test
+- name: PX-MLT5PE_1
+  types:
+    - GR
+    - BS
+    - CS
+  command: recpt1 --device /dev/pxmlt5video1 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: false
+- name: PX-MLT5PE_2
+  types:
+    - GR
+    - BS
+    - CS
+  command: recpt1 --device /dev/pxmlt5video2 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: false
+- name: PX-MLT5PE_3
+  types:
+    - GR
+    - BS
+    - CS
+  command: recpt1 --device /dev/pxmlt5video3 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: false
+- name: PX-MLT5PE_4
+  types:
+    - GR
+    - BS
+    - CS
+  command: recpt1 --device /dev/pxmlt5video4 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: false

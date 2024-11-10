@@ -6,6 +6,7 @@
 /recorded/*
 /mirakurun/data/*
 /mirakurun/conf/*
+!/mirakurun/conf/tuners.yml
 /epgstation/custom.Dockerfile
 /epgstation/thumbnail/*.jpg
 /epgstation/data/streamfiles/*.ts
@@ -16,6 +17,13 @@
 !/epgstation/config/operatorLogConfig.sample.yml
 !/epgstation/config/epgUpdaterLogConfig.sample.yml
 !/epgstation/config/serviceLogConfig.sample.yml
+!/epgstation/config/qsvenc_h264.sh
+!/epgstation/config/qsvenc_h265.sh
+!/epgstation/config/tsreplace.sh
+!/epgstation/config/certs
+/epgstation/config/certs/*.crt
+/epgstation/config/certs/*.key
+
 /epgstation/data/*.json
 /docker-compose.yml
 !.gitkeep

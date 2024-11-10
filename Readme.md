@@ -11,6 +11,7 @@
 
 - PX-MLT5PE用にconfigを調整
 - [libsobacas](https://github.com/tsunoda14/libsobacas)を組み込み、外部カードリーダー無しで動作するよう調整
+- QSVEncによるハードウェアエンコードに対応
 
 ## インストール手順
 
