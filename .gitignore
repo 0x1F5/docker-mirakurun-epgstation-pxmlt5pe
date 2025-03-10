@@ -6,6 +6,7 @@
 /recorded/*
 /mirakurun/data/*
 /mirakurun/conf/*
+/mirakurun/opt/bin/bcas_keys
 !/mirakurun/conf/tuners.yml
 /epgstation/custom.Dockerfile
 /epgstation/thumbnail/*.jpg

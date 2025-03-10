@@ -7,6 +7,9 @@ if ! (type "recpt1" > /dev/null 2>&1); then
 
 	cd /tmp
 	git clone --depth 1 https://github.com/tsunoda14/libyakisoba.git
+	if [ ! -e /opt/bin/bcas_keys ]; then
+		cp libyakisoba/src/bcas_keys /opt/bin/bcas_keys
+	fi
 	cd libyakisoba; autoreconf -i; mkdir build; cd build
 	../configure
 	make
@@ -40,6 +43,7 @@ if ! (type "recpt1" > /dev/null 2>&1); then
 
 	apt-get clean
 	rm -rf /var/lib/apt/lists/*
+	rm -rf /tmp/*
 fi
 
 recpt1 -v
