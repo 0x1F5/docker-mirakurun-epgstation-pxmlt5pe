@@ -68,11 +68,7 @@ services:
             - "8889:8889"
 #         user: "1000:1000"
         devices:
-            - /dev/pxmlt5video0:/dev/pxmlt5video0
-            - /dev/pxmlt5video1:/dev/pxmlt5video1
-            - /dev/pxmlt5video2:/dev/pxmlt5video2
-            - /dev/pxmlt5video3:/dev/pxmlt5video3
-            - /dev/pxmlt5video4:/dev/pxmlt5video4
+            - /dev/dri
         restart: always
 
 volumes:
