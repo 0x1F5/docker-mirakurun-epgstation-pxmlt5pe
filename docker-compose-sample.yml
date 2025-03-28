@@ -68,7 +68,7 @@ services:
             - "8889:8889"
         # user: "1000:1000"
         devices:
-            - /dev/dri
+            - /dev/dri:/dev/dri
         restart: always
 
 volumes:
