@@ -50,11 +50,17 @@ RUN mkdir /tmp/ffmpeg_sources && \
     make install
 
 # QSVEnc
-RUN curl -fsSL https://github.com/rigaya/QSVEnc/releases/download/7.68/qsvencc_7.68_Ubuntu24.04_amd64.deb -o qsvencc_Ubuntu24.04_amd64.deb && \
+RUN bash -c "curl -s https://api.github.com/repos/rigaya/QSVEnc/releases/latest | \
+    grep 'browser_download_url.*qsvencc_.*_Ubuntu24.04_amd64.deb' | \
+    cut -d : -f 2,3 | tr -d '\"' | sed 's/^ *//' | \
+    xargs curl -fsSL -o qsvencc_Ubuntu24.04_amd64.deb" && \
     apt-get -y install ./qsvencc_Ubuntu24.04_amd64.deb
 
 # tsreplace
-RUN curl -fsSL https://github.com/rigaya/tsreplace/releases/download/0.10/tsreplace_0.10_Ubuntu24.04_amd64.deb -o tsreplace_Ubuntu24.04_amd64.deb && \
+RUN bash -c "curl -s https://api.github.com/repos/rigaya/tsreplace/releases/latest | \
+    grep 'browser_download_url.*tsreplace_.*_Ubuntu24.04_amd64.deb' | \
+    cut -d : -f 2,3 | tr -d '\"' | sed 's/^ *//' | \
+    xargs curl -fsSL -o tsreplace_Ubuntu24.04_amd64.deb" && \
     apt-get -y install ./tsreplace_Ubuntu24.04_amd64.deb
 
 # 不要なパッケージを削除
