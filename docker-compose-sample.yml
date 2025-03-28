@@ -17,6 +17,7 @@ services:
             BCAS_KEYS_FILE: "/opt/bin/bcas_keys"
         devices:
             - /dev/bus:/dev/bus
+            - /dev/dvb:/dev/dvb
             - /dev/pxmlt5video0:/dev/pxmlt5video0
             - /dev/pxmlt5video1:/dev/pxmlt5video1
             - /dev/pxmlt5video2:/dev/pxmlt5video2

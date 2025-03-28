@@ -38,3 +38,13 @@
   command: recpt1 --device /dev/pxmlt5video4 <channel> - -
   decoder: arib-b25-stream-test
   isDisabled: false
+- name: tbs6812_0
+  types:
+    - SKY
+  command: /opt/bin/dantto4k.sh 0 <channel>
+  isDisabled: false
+- name: tbs6812_1
+  types:
+    - SKY
+  command: /opt/bin/dantto4k.sh 1 <channel>
+  isDisabled: false

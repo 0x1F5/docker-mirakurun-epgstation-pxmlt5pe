@@ -4,6 +4,8 @@
 if ! (type "recpt1" > /dev/null 2>&1); then
 	apt-get update
 	apt-get install -y --no-install-recommends git autoconf automake cmake libpcsclite1 libtool
+	apt-get install -y --no-install-recommends wget libsrt1.5-openssl librist4 libedit2
+	apt-get install -y --no-install-recommends libnghttp2-dev libidn2-dev librtmp-dev libssh2-1-dev libpsl-dev libkrb5-dev libldap2-dev libzstd-dev libbrotli-dev libmbedtls-dev libudev-dev libssh-dev
 
 	cd /tmp
 	git clone --depth 1 https://github.com/tsunoda14/libyakisoba.git
@@ -39,6 +41,24 @@ if ! (type "recpt1" > /dev/null 2>&1); then
 	./autogen.sh
 	./configure --enable-b25
 	make
+	make install
+
+	cd /tmp
+	git clone https://github.com/otya128/recdvb.git
+	cd recdvb
+	./autogen.sh
+	./configure
+	make
+	make install
+
+	cd /tmp
+	wget https://github.com/tsduck/tsduck/releases/download/v3.39-3956/tsduck-dev_3.39-3956.debian12_amd64.deb --no-check-certificate
+	wget https://github.com/tsduck/tsduck/releases/download/v3.39-3956/tsduck_3.39-3956.debian12_amd64.deb --no-check-certificate
+	apt install -y ./tsduck_3.39-3956.debian12_amd64.deb ./tsduck-dev_3.39-3956.debian12_amd64.deb
+	git clone https://github.com/nekohkr/dantto4k.git
+	cd dantto4k
+	sed -i '4i#include <cstddef>' src/adtsConverter.h
+	make TSDUCK_LIB="\$(shell pkg-config --static --libs tsduck)"
 	make install
 
 	apt-get clean
