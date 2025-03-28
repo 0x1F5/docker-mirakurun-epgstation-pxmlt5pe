@@ -1,5 +1,5 @@
-FROM l3tnun/epgstation:master-debian as epgstation
-FROM ubuntu:24.04 as base
+FROM l3tnun/epgstation:master-debian AS epgstation
+FROM ubuntu:24.04 AS base
 COPY --from=epgstation /usr/local/include/ /usr/local/include/
 COPY --from=epgstation /usr/local/lib/ /usr/local/lib/
 COPY --from=epgstation /usr/local/bin/ /usr/local/bin/
