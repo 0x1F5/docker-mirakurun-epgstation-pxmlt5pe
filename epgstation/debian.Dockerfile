@@ -12,7 +12,6 @@ COPY --from=epgstation /app/client/ /app/client/
 ENV DEV="make gcc git g++ automake curl wget autoconf build-essential libass-dev libfreetype6-dev libsdl1.2-dev libtheora-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev pkg-config texinfo zlib1g-dev"
 ENV QSVDEV="wget git cmake intel-media-va-driver-non-free libva-drm2 libva-x11-2 libva-glx2 libx11-dev libva-dev libigfxcmrt7 libdrm-dev opencl-headers libavcodec60 libavcodec-dev libavutil58 libavutil-dev libavformat60 libavformat-dev libswresample4 libswresample-dev libavfilter9 libavfilter-dev libavdevice60 libavdevice-dev libavfilter-dev libass9 libass-dev"
 ENV TSREPDEV="wget git pkg-config python3 build-essential libavcodec-dev libavutil-dev libavformat-dev libswresample-dev libavfilter-dev"
-ENV AVISYNTHDEV="build-essential cmake git ninja-build checkinstall"
 ENV FFMPEG_VERSION=7.0
 
 RUN apt-get update && \
@@ -21,8 +20,7 @@ RUN apt-get update && \
     apt-get -y install libx265-dev libnuma-dev && \
     apt-get -y install libasound2t64 libass9 libvdpau1 libva-x11-2 libva-drm2 libxcb-shm0 libxcb-xfixes0 libxcb-shape0 libvorbisenc2 libtheora0 libaribb24-dev && \
     apt-get -y install $QSVDEV && \
-    apt-get -y install $TSREPDEV && \
-    apt-get -y install $AVISYNTHDEV
+    apt-get -y install $TSREPDEV
 
 # ffmpeg build
 RUN mkdir /tmp/ffmpeg_sources && \
@@ -51,25 +49,13 @@ RUN mkdir /tmp/ffmpeg_sources && \
     make -j$(nproc) && \
     make install
 
-# QSVENC
-RUN curl -fsSL https://github.com/rigaya/QSVEnc/releases/download/7.68/qsvencc_7.68_Ubuntu24.04_amd64.deb -o qsvencc_7.68_Ubuntu24.04_amd64.deb && \
-    apt-get -y install ./qsvencc_7.68_Ubuntu24.04_amd64.deb && \
-\
-# QSVENC
-    curl -fsSL https://github.com/rigaya/tsreplace/releases/download/0.10/tsreplace_0.10_Ubuntu24.04_amd64.deb -o tsreplace_0.10_Ubuntu24.04_amd64.deb && \
-    apt-get -y install ./tsreplace_0.10_Ubuntu24.04_amd64.deb
+# QSVEnc
+RUN curl -fsSL https://github.com/rigaya/QSVEnc/releases/download/7.68/qsvencc_7.68_Ubuntu24.04_amd64.deb -o qsvencc_Ubuntu24.04_amd64.deb && \
+    apt-get -y install ./qsvencc_Ubuntu24.04_amd64.deb
 
-RUN cd /tmp/ && \
-    git clone git://github.com/AviSynth/AviSynthPlus.git && \
-    cd AviSynthPlus && \
-    mkdir avisynth-build && \
-    cd avisynth-build && \
-    cmake ../ -G Ninja && \
-    ninja && \
-        sudo checkinstall --pkgname=avisynth --pkgversion="$(grep -r \
-        Version avs_core/avisynth.pc | cut -f2 -d " ")-$(date --rfc-3339=date | \
-        sed 's/-//g')-git" --backup=no --deldoc=yes --delspec=yes --deldesc=yes \
-        --strip=yes --stripso=yes --addso=yes --fstrans=no --default ninja install
+# tsreplace
+RUN curl -fsSL https://github.com/rigaya/tsreplace/releases/download/0.10/tsreplace_0.10_Ubuntu24.04_amd64.deb -o tsreplace_Ubuntu24.04_amd64.deb && \
+    apt-get -y install ./tsreplace_Ubuntu24.04_amd64.deb
 
 # 不要なパッケージを削除
 RUN apt-get -y remove $DEV && \
