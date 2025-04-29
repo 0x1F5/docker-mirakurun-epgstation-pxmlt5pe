@@ -18,9 +18,8 @@
 !/epgstation/config/operatorLogConfig.sample.yml
 !/epgstation/config/epgUpdaterLogConfig.sample.yml
 !/epgstation/config/serviceLogConfig.sample.yml
-!/epgstation/config/qsvenc_h264.sh
-!/epgstation/config/qsvenc_h265.sh
-!/epgstation/config/tsreplace.sh
+!/epgstation/config/enc_qsvenc.js
+!/epgstation/config/enc_tsreplace.js
 !/epgstation/config/certs
 /epgstation/config/certs/*.crt
 /epgstation/config/certs/*.key

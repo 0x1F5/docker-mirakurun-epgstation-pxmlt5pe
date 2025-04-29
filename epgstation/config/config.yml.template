@@ -42,15 +42,15 @@ encodeProcessNum: 4
 concurrentEncodeNum: 1
 encode:
     - name: H265_qsvenc
-      cmd: '/bin/bash %ROOT%/config/qsvenc_h265.sh'
+      cmd: '%NODE% %ROOT%/config/enc_qsvenc.js h265'
       suffix: .mp4
       rate: 4.0
     - name: H264_qsvenc
-      cmd: '/bin/bash %ROOT%/config/qsvenc_h264.sh'
+      cmd: '%NODE% %ROOT%/config/enc_qsvenc.js h264'
       suffix: .mp4
       rate: 4.0
     - name: tsreplace
-      cmd: '/bin/bash %ROOT%/config/tsreplace.sh'
+      cmd: '%NODE% %ROOT%/config/enc_tsreplace.js'
       suffix: -tsreplace.m2ts
       rate: 4.0
     - name: H.264
